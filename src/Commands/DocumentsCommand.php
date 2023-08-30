@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Aseventeam\Documents\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class DocumentsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-documents';
 
     public $description = 'My command';
 
