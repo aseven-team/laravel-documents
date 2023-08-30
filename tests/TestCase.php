@@ -2,9 +2,9 @@
 
 namespace Aseventeam\Documents\Tests;
 
+use Aseventeam\Documents\DocumentsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Aseventeam\Documents\DocumentsServiceProvider;
 
 class TestCase extends Orchestra
 {

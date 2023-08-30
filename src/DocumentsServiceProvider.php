@@ -2,9 +2,9 @@
 
 namespace Aseventeam\Documents;
 
+use Aseventeam\Documents\Commands\DocumentsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Aseventeam\Documents\Commands\DocumentsCommand;
 
 class DocumentsServiceProvider extends PackageServiceProvider
 {
