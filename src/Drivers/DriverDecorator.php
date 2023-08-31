@@ -14,8 +14,7 @@ class DriverDecorator implements Driver
 {
     public function __construct(
         protected Driver $driver,
-    )
-    {
+    ) {
     }
 
     public function create(
@@ -23,9 +22,8 @@ class DriverDecorator implements Driver
         DocumentTemplate $template,
         array $variables = [],
         array $options = [],
-        ?string $documentType = null,
-    ): DocumentFile
-    {
+        string $documentType = null,
+    ): DocumentFile {
         $variables = array_merge($template->variables, $variables);
         $options = array_merge($template->options, $options);
 
@@ -47,9 +45,8 @@ class DriverDecorator implements Driver
         HasDocuments $model,
         string $html,
         array $options = [],
-        ?string $documentType = null,
-    ): DocumentFile
-    {
+        string $documentType = null,
+    ): DocumentFile {
         $filePath = $this->renderHtml($html, $options);
 
         $size = Storage::fileSize($filePath);
@@ -79,7 +76,7 @@ class DriverDecorator implements Driver
     protected function savePdf(string $pdfContent): string
     {
         $filename = Str::random(40);
-        $path = date('Y/m/') . 'documents/' . $filename . '.pdf';
+        $path = date('Y/m/').'documents/'.$filename.'.pdf';
 
         Storage::put($path, $pdfContent, ['visibility' => 'public']);
 

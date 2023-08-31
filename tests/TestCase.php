@@ -3,7 +3,6 @@
 namespace AsevenTeam\Documents\Tests;
 
 use AsevenTeam\Documents\DocumentServiceProvider;
-use AsevenTeam\Documents\Tests\TestModels\TestModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

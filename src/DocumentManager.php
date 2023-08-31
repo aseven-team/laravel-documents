@@ -3,8 +3,8 @@
 namespace AsevenTeam\Documents;
 
 use AsevenTeam\Documents\Contract\Driver;
-use AsevenTeam\Documents\Drivers\DriverDecorator;
 use AsevenTeam\Documents\Drivers\BrowsershotDriver;
+use AsevenTeam\Documents\Drivers\DriverDecorator;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 
@@ -18,7 +18,7 @@ class DocumentManager
         return config('documents.default_driver');
     }
 
-    public function driver(?string $driver = null): DriverDecorator
+    public function driver(string $driver = null): DriverDecorator
     {
         $driver ??= $this->getDefaultDriver();
 
