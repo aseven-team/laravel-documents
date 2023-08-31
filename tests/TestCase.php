@@ -1,9 +1,12 @@
 <?php
 
-namespace Aseventeam\Documents\Tests;
+namespace AsevenTeam\Documents\Tests;
 
-use Aseventeam\Documents\DocumentsServiceProvider;
+use AsevenTeam\Documents\DocumentServiceProvider;
+use AsevenTeam\Documents\Tests\TestModels\TestModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -13,14 +16,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Aseventeam\\Documents\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'AsevenTeam\\Documents\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            DocumentsServiceProvider::class,
+            DocumentServiceProvider::class,
         ];
     }
 
@@ -28,9 +31,15 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-documents_table.php.stub';
-        $migration->up();
-        */
+        Schema::create('test_models', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        $createDocumentTemplatesTable = include __DIR__.'/../database/migrations/create_document_templates_table.php';
+        $createDocumentTemplatesTable->up();
+
+        $createDocumentFilesTable = include __DIR__.'/../database/migrations/create_document_files_table.php';
+        $createDocumentFilesTable->up();
     }
 }

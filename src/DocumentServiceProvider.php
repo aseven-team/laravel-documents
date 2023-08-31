@@ -1,12 +1,11 @@
 <?php
 
-namespace Aseventeam\Documents;
+namespace AsevenTeam\Documents;
 
-use Aseventeam\Documents\Commands\DocumentsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class DocumentsServiceProvider extends PackageServiceProvider
+class DocumentServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -19,7 +18,9 @@ class DocumentsServiceProvider extends PackageServiceProvider
             ->name('laravel-documents')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel-documents_table')
-            ->hasCommand(DocumentsCommand::class);
+            ->hasMigrations([
+                'create_document_templates_table',
+                'create_document_files_table',
+            ]);
     }
 }

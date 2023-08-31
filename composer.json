@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "illuminate/contracts": "^10.0",
+        "spatie/browsershot": "^3.58",
+        "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -34,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Aseventeam\\Documents\\": "src/",
-            "Aseventeam\\Documents\\Database\\Factories\\": "database/factories/"
+            "AsevenTeam\\Documents\\": "src/",
+            "AsevenTeam\\Documents\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Aseventeam\\Documents\\Tests\\": "tests/",
+            "AsevenTeam\\Documents\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -71,10 +72,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Aseventeam\\Documents\\DocumentsServiceProvider"
+                "AsevenTeam\\Documents\\DocumentServiceProvider"
             ],
             "aliases": {
-                "Documents": "Aseventeam\\Documents\\Facades\\Documents"
+                "Documents": "AsevenTeam\\Documents\\Facades\\Document"
             }
         }
     },
