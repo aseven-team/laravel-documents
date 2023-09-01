@@ -61,7 +61,7 @@ class DriverDecorator implements Driver
 
     protected function renderTemplate(DocumentTemplate $template, array $variables, array $options): string
     {
-        $html = Blade::render($template->template, $variables, true);
+        $html = Blade::render($template->content, $variables, true);
 
         return $this->renderHtml($html, $options);
     }

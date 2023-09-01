@@ -12,8 +12,9 @@ class DocumentTemplateFactory extends Factory
     public function definition(): array
     {
         return [
+            'key' => $this->faker->word(),
             'name' => $this->faker->name(),
-            'template' => $this->faker->word(),
+            'content' => $this->faker->word(),
             'variables' => [],
             'options' => [],
         ];

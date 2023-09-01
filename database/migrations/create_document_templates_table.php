@@ -11,8 +11,9 @@ return new class extends Migration
         Schema::create('document_templates', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
+            $table->string('key')->unique();
             $table->string('name');
-            $table->longText('template')->nullable();
+            $table->longText('content')->nullable();
             $table->json('variables')->nullable();
             $table->json('options')->nullable();
             $table->timestamps();
