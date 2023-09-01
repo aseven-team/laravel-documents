@@ -16,7 +16,8 @@ class DriverDecorator implements Driver
     ) {
     }
 
-    public function create(DocumentTemplate $template, array $variables = [], array $options = []): DocumentFile {
+    public function create(DocumentTemplate $template, array $variables = [], array $options = []): DocumentFile
+    {
         $variables = array_merge($template->variables, $variables);
         $options = array_merge($template->options, $options);
 
@@ -38,7 +39,8 @@ class DriverDecorator implements Driver
         ]);
     }
 
-    public function createFromHtml(string $html, array $options = []): DocumentFile {
+    public function createFromHtml(string $html, array $options = []): DocumentFile
+    {
         $pdfContent = $this->render($html, $options);
 
         $filePath = $this->savePdf($pdfContent);
