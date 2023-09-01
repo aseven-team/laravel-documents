@@ -11,16 +11,15 @@ return new class extends Migration
         Schema::create('document_files', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->morphs('model');
 
             $table->foreignId('document_template_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
 
-            $table->string('document_type')->nullable()->index();
             $table->string('path');
             $table->unsignedBigInteger('size')->nullable();
+            $table->longText('content');
             $table->json('variables')->nullable();
             $table->json('options')->nullable();
 

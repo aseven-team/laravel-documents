@@ -18,11 +18,6 @@ class DocumentFile extends Model
         'options' => 'array',
     ];
 
-    public function model(): MorphTo
-    {
-        return $this->morphTo();
-    }
-
     public function template(): BelongsTo
     {
         return $this->belongsTo(DocumentTemplate::class, 'document_template_id');

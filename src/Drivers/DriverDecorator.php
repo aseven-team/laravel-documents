@@ -3,7 +3,6 @@
 namespace AsevenTeam\Documents\Drivers;
 
 use AsevenTeam\Documents\Contract\Driver;
-use AsevenTeam\Documents\Contract\HasDocuments;
 use AsevenTeam\Documents\Models\DocumentFile;
 use AsevenTeam\Documents\Models\DocumentTemplate;
 use Illuminate\Support\Facades\Blade;
@@ -17,60 +16,46 @@ class DriverDecorator implements Driver
     ) {
     }
 
-    public function create(
-        HasDocuments $model,
-        DocumentTemplate $template,
-        array $variables = [],
-        array $options = [],
-        string $documentType = null,
-    ): DocumentFile {
+    public function create(DocumentTemplate $template, array $variables = [], array $options = []): DocumentFile {
         $variables = array_merge($template->variables, $variables);
         $options = array_merge($template->options, $options);
 
-        $filePath = $this->renderTemplate($template, $variables, $options);
+        $html = $this->renderTemplate($template, $variables);
+
+        $pdfContent = $this->render($html, $options);
+
+        $filePath = $this->savePdf($pdfContent);
 
         $size = Storage::fileSize($filePath);
 
-        return $model->documents()->create([
+        return DocumentFile::create([
             'document_template_id' => $template->id,
-            'document_type' => $documentType,
             'path' => $filePath,
             'size' => $size,
+            'content' => $html,
             'variables' => $variables,
             'options' => $options,
         ]);
     }
 
-    public function createFromHtml(
-        HasDocuments $model,
-        string $html,
-        array $options = [],
-        string $documentType = null,
-    ): DocumentFile {
-        $filePath = $this->renderHtml($html, $options);
+    public function createFromHtml(string $html, array $options = []): DocumentFile {
+        $pdfContent = $this->render($html, $options);
+
+        $filePath = $this->savePdf($pdfContent);
 
         $size = Storage::fileSize($filePath);
 
-        return $model->documents()->create([
-            'document_type' => $documentType,
+        return DocumentFile::create([
             'path' => $filePath,
             'size' => $size,
+            'content' => $html,
             'options' => $options,
         ]);
     }
 
-    protected function renderTemplate(DocumentTemplate $template, array $variables, array $options): string
+    protected function renderTemplate(DocumentTemplate $template, array $variables): string
     {
-        $html = Blade::render($template->content, $variables, true);
-
-        return $this->renderHtml($html, $options);
-    }
-
-    protected function renderHtml(string $html, array $options): string
-    {
-        $pdfContent = $this->render($html, $options);
-
-        return $this->savePdf($pdfContent);
+        return Blade::render($template->content, $variables, true);
     }
 
     protected function savePdf(string $pdfContent): string
