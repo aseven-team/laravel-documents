@@ -22,8 +22,13 @@ class DriverDecorator implements Driver
 
     public function create(DocumentTemplate $template, array $variables = [], array $options = []): DocumentFile
     {
-        $variables = array_merge($template->variables, $variables);
-        $options = array_merge($template->options, $options);
+        if (is_array($template->variables)) {
+            $variables = array_merge($template->variables, $variables);
+        }
+
+        if (is_array($template->options)) {
+            $options = array_merge($template->options, $options);
+        }
 
         $html = $this->renderTemplate($template, $variables);
 
