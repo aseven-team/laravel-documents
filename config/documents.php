@@ -3,9 +3,23 @@
 return [
 
     /*
-     * The following driver will be used for rendering pdf file.
-     *
-     * Supported: "browsershot"
+     * Specifies the default driver used for document pdf generation.
      */
-    'default_driver' => env('DOCUMENT_DRIVER', 'browsershot'),
+
+    'default' => env('DOCUMENT_DRIVER', 'browsershot'),
+
+    /*
+     * Defines each available document drivers. Use the disks you've
+     * configured in config/filesystems.php.
+     *
+     * Supported: "browsershot",
+     */
+
+    'drivers' => [
+
+        'browsershot' => [
+            'driver' => 'browsershot',
+            'disk' => 'public',
+        ],
+    ],
 ];

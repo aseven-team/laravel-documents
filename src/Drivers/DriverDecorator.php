@@ -5,14 +5,18 @@ namespace AsevenTeam\Documents\Drivers;
 use AsevenTeam\Documents\Contract\Driver;
 use AsevenTeam\Documents\Models\DocumentFile;
 use AsevenTeam\Documents\Models\DocumentTemplate;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
+use RuntimeException;
 
 class DriverDecorator implements Driver
 {
     public function __construct(
         protected Driver $driver,
+        protected string $diskName,
     ) {
     }
 
@@ -23,11 +27,11 @@ class DriverDecorator implements Driver
 
         $html = $this->renderTemplate($template, $variables);
 
-        $pdfContent = $this->render($html, $options);
+        $pdf = $this->render($html, $options);
 
-        $filePath = $this->savePdf($pdfContent);
+        $filePath = $this->save($pdf);
 
-        $size = Storage::fileSize($filePath);
+        $size = $this->getFileSize($filePath);
 
         return DocumentFile::create([
             'document_template_id' => $template->id,
@@ -41,11 +45,11 @@ class DriverDecorator implements Driver
 
     public function createFromHtml(string $html, array $options = []): DocumentFile
     {
-        $pdfContent = $this->render($html, $options);
+        $pdf = $this->render($html, $options);
 
-        $filePath = $this->savePdf($pdfContent);
+        $filePath = $this->save($pdf);
 
-        $size = Storage::fileSize($filePath);
+        $size = $this->getFileSize($filePath);
 
         return DocumentFile::create([
             'path' => $filePath,
@@ -60,14 +64,36 @@ class DriverDecorator implements Driver
         return Blade::render($template->content, $variables, true);
     }
 
-    protected function savePdf(string $pdfContent): string
+    protected function save(string $content): string
     {
-        $filename = Str::random(40);
-        $path = date('Y/m/').'documents/'.$filename.'.pdf';
+        $path = $this->getDestinationPath();
 
-        Storage::put($path, $pdfContent, ['visibility' => 'public']);
+        if (! $this->getDisk()->put($path, $content)) {
+            throw new RuntimeException("Disk [{$this->diskName}] cannot be accessed.");
+        }
 
         return $path;
+    }
+
+    protected function getFileSize(string $path): int
+    {
+        return $this->getDisk()->size($path);
+    }
+
+    protected function getDestinationPath(): string
+    {
+        $filename = Str::random(40);
+
+        return date('Y/m/').'documents/'.$filename.'.pdf';
+    }
+
+    protected function getDisk(): Filesystem
+    {
+        if (is_null(config("filesystems.disks.{$this->diskName}"))) {
+            throw new InvalidArgumentException("There is no filesystem disk named [{$this->diskName}].");
+        }
+
+        return Storage::disk($this->diskName);
     }
 
     public function render(string $html, array $options = []): string
