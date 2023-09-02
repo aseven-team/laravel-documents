@@ -12,7 +12,6 @@ class DocumentServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-documents')
             ->hasConfigFile()
-            ->hasViews()
             ->hasMigration('create_document_templates_table');
     }
 }
