@@ -17,31 +17,25 @@ class DocumentManager
     {
         $driver ??= $this->getDefaultDriver();
 
-        $config = $this->getDriverConfig($driver);
-
-        if (is_null($config)) {
-            throw new InvalidArgumentException("Driver [{$driver}] is not defined.");
-        }
-
         if (! isset($this->drivers[$driver])) {
-            $this->drivers[$driver] = $this->createDriver($config);
+            $this->drivers[$driver] = $this->createDriver($driver);
         }
 
         return $this->drivers[$driver];
     }
 
-    protected function createDriver(array $config): DriverDecorator
+    protected function createDriver(string $driver): DriverDecorator
     {
-        $method = 'create'.Str::studly($config['driver']).'Driver';
+        $method = 'create'.Str::studly($driver).'Driver';
 
         if (! method_exists($this, $method)) {
-            throw new InvalidArgumentException("Driver [{$config['driver']}] is not supported.");
+            throw new InvalidArgumentException("Driver [$driver] is not supported.");
         }
 
         /** @var Driver $driver */
         $driver = $this->$method();
 
-        return new DriverDecorator($driver, $config['disk']);
+        return new DriverDecorator($driver);
     }
 
     protected function createBrowsershotDriver(): Driver
@@ -49,14 +43,9 @@ class DocumentManager
         return new BrowsershotDriver();
     }
 
-    protected function getDriverConfig(string $driver): ?array
-    {
-        return config("documents.drivers.{$driver}");
-    }
-
     protected function getDefaultDriver(): string
     {
-        return config('documents.default');
+        return config('documents.default_driver');
     }
 
     public function __call($method, $parameters)

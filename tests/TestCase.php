@@ -37,8 +37,5 @@ class TestCase extends Orchestra
 
         $createDocumentTemplatesTable = include __DIR__.'/../database/migrations/create_document_templates_table.php';
         $createDocumentTemplatesTable->up();
-
-        $createDocumentFilesTable = include __DIR__.'/../database/migrations/create_document_files_table.php';
-        $createDocumentFilesTable->up();
     }
 }
