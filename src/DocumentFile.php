@@ -26,14 +26,14 @@ class DocumentFile
     {
         $directory = sys_get_temp_dir();
 
-        return $directory . '/' . uniqid('laravel_documents') . '.pdf';
+        return $directory.'/'.uniqid('laravel_documents').'.pdf';
     }
 
     public function download(): Response
     {
         return new Response($this->getContents(), 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="'.basename($this->path).'"'
+            'Content-Disposition' => 'attachment; filename="'.basename($this->path).'"',
         ]);
     }
 
@@ -41,7 +41,7 @@ class DocumentFile
     {
         return new Response($this->getContents(), 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.basename($this->path).'"'
+            'Content-Disposition' => 'inline; filename="'.basename($this->path).'"',
         ]);
     }
 
@@ -51,7 +51,7 @@ class DocumentFile
             echo $this->getContents();
         }, 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.basename($this->path).'"'
+            'Content-Disposition' => 'inline; filename="'.basename($this->path).'"',
         ]);
     }
 
