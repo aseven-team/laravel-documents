@@ -16,31 +16,6 @@ parameters:
 			path: src/Drivers/DriverDecorator.php
 
 		-
-			message: "#^Property 'content' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
-			count: 2
-			path: src/Drivers/DriverDecorator.php
-
-		-
-			message: "#^Property 'document_template_id' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
-			count: 1
-			path: src/Drivers/DriverDecorator.php
-
-		-
-			message: "#^Property 'options' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
-			count: 2
-			path: src/Drivers/DriverDecorator.php
-
-		-
-			message: "#^Property 'path' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
-			count: 2
-			path: src/Drivers/DriverDecorator.php
-
-		-
-			message: "#^Property 'size' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
-			count: 2
-			path: src/Drivers/DriverDecorator.php
-
-		-
-			message: "#^Property 'variables' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			message: "#^Property 'key' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentTemplate model\\.$#"
 			count: 1
 			path: src/Drivers/DriverDecorator.php
