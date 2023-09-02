@@ -7,5 +7,5 @@ return [
      *
      * Supported: "browsershot"
      */
-    'default_driver' => 'browsershot',
+    'default_driver' => env('DOCUMENT_DRIVER', 'browsershot'),
 ];
