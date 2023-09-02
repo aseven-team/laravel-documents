@@ -1,0 +1,46 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Access to an undefined property AsevenTeam\\\\Documents\\\\Models\\\\DocumentTemplate\\:\\:\\$content\\.$#"
+			count: 1
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Access to an undefined property AsevenTeam\\\\Documents\\\\Models\\\\DocumentTemplate\\:\\:\\$options\\.$#"
+			count: 1
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Access to an undefined property AsevenTeam\\\\Documents\\\\Models\\\\DocumentTemplate\\:\\:\\$variables\\.$#"
+			count: 1
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Property 'content' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			count: 2
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Property 'document_template_id' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			count: 1
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Property 'options' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			count: 2
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Property 'path' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			count: 2
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Property 'size' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			count: 2
+			path: src/Drivers/DriverDecorator.php
+
+		-
+			message: "#^Property 'variables' does not exist in AsevenTeam\\\\Documents\\\\Models\\\\DocumentFile model\\.$#"
+			count: 1
+			path: src/Drivers/DriverDecorator.php
