@@ -5,6 +5,7 @@ namespace AsevenTeam\Documents;
 use AsevenTeam\Documents\Contract\Driver;
 use AsevenTeam\Documents\Drivers\BrowsershotDriver;
 use AsevenTeam\Documents\Drivers\DriverDecorator;
+use AsevenTeam\Documents\Drivers\SnappyDriver;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 
@@ -41,6 +42,11 @@ class DocumentManager
     protected function createBrowsershotDriver(): Driver
     {
         return new BrowsershotDriver();
+    }
+
+    protected function createSnappyDriver(): Driver
+    {
+        return new SnappyDriver();
     }
 
     protected function getDefaultDriver(): string
