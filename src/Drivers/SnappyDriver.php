@@ -17,6 +17,7 @@ class SnappyDriver implements Driver
                 'margin-right' => $options['margin-right'] ?? 13.2,
                 'margin-bottom' => $options['margin-bottom'] ?? 36.7,
                 'margin-left' => $options['margin-left'] ?? 19,
+                'enable-local-file-access' => true,
             ])
             ->output();
     }
