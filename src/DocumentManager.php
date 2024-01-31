@@ -14,7 +14,7 @@ class DocumentManager
     /** @var DriverDecorator[] */
     protected array $drivers = [];
 
-    public function driver(string $driver = null): DriverDecorator
+    public function driver(?string $driver = null): DriverDecorator
     {
         $driver ??= $this->getDefaultDriver();
 
