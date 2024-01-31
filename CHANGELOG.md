@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-documents` will be documented in this file.
 
+## 0.2.2 - 2024-01-31
+
+**Full Changelog**: https://github.com/aseven-team/laravel-documents/compare/0.2.1...0.2.2
+
+- Fix: Add enable local file access in snappy driver
+
 ## 0.2.1 - 2023-09-04
 
 ### What's new
