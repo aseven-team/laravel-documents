@@ -4,6 +4,7 @@ namespace AsevenTeam\Documents;
 
 use AsevenTeam\Documents\Contract\Driver;
 use AsevenTeam\Documents\Drivers\BrowsershotDriver;
+use AsevenTeam\Documents\Drivers\DompdfDriver;
 use AsevenTeam\Documents\Drivers\DriverDecorator;
 use AsevenTeam\Documents\Drivers\SnappyDriver;
 use Illuminate\Support\Str;
@@ -47,6 +48,11 @@ class DocumentManager
     protected function createSnappyDriver(): Driver
     {
         return new SnappyDriver();
+    }
+
+    protected function createDompdfDriver(): Driver
+    {
+        return new DompdfDriver();
     }
 
     protected function getDefaultDriver(): string

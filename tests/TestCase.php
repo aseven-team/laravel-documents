@@ -4,6 +4,7 @@ namespace AsevenTeam\Documents\Tests;
 
 use AsevenTeam\Documents\DocumentServiceProvider;
 use Barryvdh\Snappy\ServiceProvider as SnappyServiceProvider;
+use Barryvdh\DomPDF\ServiceProvider as DompdfServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +26,7 @@ class TestCase extends Orchestra
         return [
             DocumentServiceProvider::class,
             SnappyServiceProvider::class,
+            DompdfServiceProvider::class,
         ];
     }
 
